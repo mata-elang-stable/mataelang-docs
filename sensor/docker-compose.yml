@@ -3,22 +3,25 @@ volumes:
 
 services:
   me-sensor-snort:
-    image: mfscy/snort-base:3
+    build: 
+      context: snort/
     network_mode: host
-    command: sh -c "pulledpork.py -c /usr/local/etc/pulledpork/pulledpork.conf && /usr/local/bin/snort -c /usr/local/etc/snort/snort.lua -s 65535 -k none -l /var/log/snort -u snort -g snort -i $NETWORK_INTERFACE -m 0x1b --plugin-path=/usr/local/etc/so_rules/"
+    restart: always
     environment:
-      - NETWORK_INTERFACE=eth0
+      - NETWORK_INTERFACE=enp2s0
     volumes:
-      - ${PWD}/snort.lua:/usr/local/etc/snort/snort.lua:ro
-      - ${PWD}/pulledpork.conf:/usr/local/etc/pulledpork/pulledpork.conf:ro
+      - ${PWD}/snort/snort.lua:/usr/local/etc/snort/snort.lua:ro
       - snort_data:/var/log/snort:rw
 
   me-sensor-snort-parser:
     image: mfscy/snort3-parser:latest
-    command: -H $MQTT_HOST -P ${MQTT_PORT:-1883} -f /var/log/snort/alert_json.txt
+    depends_on:
+      - me-sensor-snort
+    restart: always
     environment:
-      - MQTT_HOST=192.168.1.100
+      - MQTT_HOST=192.168.1.121
       - MQTT_PORT=1883
+      - SNORT_ALERT_FILE_PATH=/var/log/snort/alert_json.txt
     volumes:
       - /etc/machine-id:/etc/machine-id:ro
       - snort_data:/var/log/snort:rw
