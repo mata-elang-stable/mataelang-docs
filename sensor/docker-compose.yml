@@ -17,6 +17,9 @@ services:
         limits:
           cpus: '1'
           memory: 512M
+        reservations:
+          cpus: '0.7'
+          memory: 256M
 
   me-sensor-snort-parser:
     image: mfscy/snort3-parser:latest
@@ -37,3 +40,6 @@ services:
         limits:
           cpus: '0.25'
           memory: 25M
+        reservations:
+          cpus: '0.15'
+          memory: 15M
