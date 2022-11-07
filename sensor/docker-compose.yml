@@ -12,6 +12,11 @@ services:
     volumes:
       - ${PWD}/snort/snort.lua:/usr/local/etc/snort/snort.lua:ro
       - snort_data:/var/log/snort:rw
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
 
   me-sensor-snort-parser:
     image: mfscy/snort3-parser:latest
@@ -27,3 +32,8 @@ services:
     volumes:
       - /etc/machine-id:/etc/machine-id:ro
       - snort_data:/var/log/snort:rw
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 25M
