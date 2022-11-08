@@ -5,7 +5,7 @@
         "tasks.max" : "1",
         "connect.mqtt.clean" :"true",
         "connect.mqtt.timeout" : "1000",
-        "connect.mqtt.kcql" : "INSERT INTO snoqttv5 SELECT * FROM snoqttv5 WITHCONVERTER=`com.datamountaineer.streamreactor.connect.converters.source.JsonSimpleConverter`",
+        "connect.mqtt.kcql" : "INSERT INTO mataelang/sensor/v3/# SELECT * FROM mataelang/sensor/v3/# WITHCONVERTER=`com.datamountaineer.streamreactor.connect.converters.source.JsonSimpleConverter`",
         "connect.mqtt.keep.alive" : "1000",
         "connect.mqtt.client.id" : "dm_source_id",
         "connect.mqtt.converter.throw.on.error" : "true",
