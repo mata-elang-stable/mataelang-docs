@@ -13,15 +13,6 @@ services:
       - ./connector.json:/connector.json
     command: "curl -s -X POST -H 'Content-Type: application/json' --data @connector.json http://connect:8083/connectors"
 
-  mosquitto:
-    image: eclipse-mosquitto:latest
-    container_name: mosquitto
-    hostname: mosquitto
-    ports:
-      - '1883:1883'
-    volumes:
-      - ./testing/mosquitto.conf:/mosquitto/config/mosquitto.conf
-
   zookeeper:
     image: 'bitnami/zookeeper:latest'
     container_name: zookeeper
