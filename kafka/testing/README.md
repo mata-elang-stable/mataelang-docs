@@ -3,7 +3,7 @@
 
 ## Step to Reproduce
 
-**1. Install like Tutorial in [Readme](https://github.com/lensesio/stream-reactor).**
+**1. Install like Tutorial in Readme.**
 
 **2. Run Python Program in testing folder.**
 

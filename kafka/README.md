@@ -8,19 +8,19 @@
 
 ## Installation
 
-**1. Make clone.**
+**1. Change Directory to Project folder.**
 
 ```
-git clone https://gitlab.com/mata-elang/stable/bitnami-kafka.git ~/Confluent
+cd bitnami-kafka
 ```
 
 **2. Download "kafka-connect-mqtt" of [lensesio/tream-reactor](https://github.com/lensesio/stream-reactor) from GitHub.**
 
 ```
-wget https://github.com/lensesio/stream-reactor/releases/download/4.0.0/kafka-connect-mqtt-kafka-3-1-4.0.0.zip -P ~/Confluent
+wget https://github.com/lensesio/stream-reactor/releases/download/4.0.0/kafka-connect-mqtt-kafka-3-1-4.0.0.zip
 ```
 ```
-unzip -j ~/Confluent/kafka-connect-mqtt-kafka-3-1-4.0.0.zip -d  ~/Confluent
+unzip -j kafka-connect-mqtt-kafka-3-1-4.0.0.zip
 ```
 
 ## Configure
@@ -28,7 +28,7 @@ unzip -j ~/Confluent/kafka-connect-mqtt-kafka-3-1-4.0.0.zip -d  ~/Confluent
 **3. Edit "connector.json".**
 
 ```
-nano ~/Confluent/connector.json
+nano connector.json
 ```
 - Configuration
 ```
@@ -47,10 +47,10 @@ nano ~/Confluent/connector.json
 **4. Start Kafka services and confirm the services are up.**
 
 ```
-sudo docker-compose -f ~/Confluent/docker-compose.yml up -d
+sudo docker-compose up -d
 ```
 ```
-sudo docker-compose -f ~/Confluent/docker-compose.yml ps
+sudo docker-compose ps
 ```
 - Result
 ```
@@ -67,10 +67,10 @@ zookeeper         /etc/confluent/docker/run        Up       0.0.0.0:2181->2181/t
 
 - You may need to repeat it several times until all services is up or exit with code 0.
 ```
-sudo docker-compose -f ~/Confluent/docker-compose.yml start connect-add
+sudo docker-compose start connect-add
 ```
 ```
-sudo docker-compose -f ~/Confluent/docker-compose.yml ps
+sudo docker-compose ps
 ```
 - Result
 ```
