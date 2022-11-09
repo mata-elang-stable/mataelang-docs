@@ -10,7 +10,7 @@ services:
     environment:
       - NETWORK_INTERFACE=enp2s0
     volumes:
-      - ${PWD}/snort/snort.lua:/usr/local/etc/snort/snort.lua:ro
+      - ./snort/snort.lua:/usr/local/etc/snort/snort.lua:ro
       - snort_data:/var/log/snort:rw
     deploy:
       resources:
