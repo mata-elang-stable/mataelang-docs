@@ -34,7 +34,6 @@ services:
     depends_on:
       - zookeeper
       - kafka
-      # - connect
       - mqtt-source
     ports:
       - "9021:8080"
