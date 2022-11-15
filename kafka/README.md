@@ -11,7 +11,15 @@
 **1. Configure the environment variable in `.env` file**
 
 You can change the environment of the services in `conf` directory.
-
+- zookeper.env
+    Environtment Variable File for customizing the Apache Zookeper   Dockerfile, implemented variable in zookeper.env file is default variable
+- kafka.env
+    Environtment Variable File for customizing the Kafka Dockerfile, implemented variables in kafka.env are default variables
+- mqtt-source.env
+    Environtment Variable File for customizing the Dockerfile that connect the MQTT Hosts and Kafka on the server, implemented variables in mqtt-source.env are default variables
+- control-center.env
+    Environtment Variable File for customizing the Dockerfile that represent the Apache Kafka UI, implemented variables in control-center.env are default variables
+    
 **2. Start Kafka services and confirm the services are up.**
 
 ```
