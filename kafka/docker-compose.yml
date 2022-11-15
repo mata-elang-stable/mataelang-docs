@@ -3,14 +3,9 @@ version: '3'
 services:
   mqtt-source:
     image: mfscy/kafka-mqtt-source
-    environment:
-      - MQTT_HOST=172.17.0.1
-      # - MQTT_PORT=1883
-      # - MQTT_USERNAME=username
-      # - MQTT_PASSWORD=password
-      - MQTT_TOPIC=mataelang/sensor/v3/#
-      - KAFKA_BOOSTRAP_SERVERS=kafka:9092
-      # - KAFKA_PRODUCE_TOPIC=sensor_events
+    container_name: mqtt-source
+    env_file:
+      - conf/mqtt-source.env
 
   zookeeper:
     image: 'bitnami/zookeeper:latest'
@@ -18,8 +13,8 @@ services:
     hostname: zookeeper
     ports:
       - '2181:2181'
-    environment:
-      - ALLOW_ANONYMOUS_LOGIN=yes
+    env_file:
+      - conf/zookeeper.env
 
   kafka:
     image: 'bitnami/kafka:latest'
@@ -28,14 +23,8 @@ services:
     ports:
       # - '9092:9092'
       - '9093:9093'
-    environment:
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-      - ALLOW_PLAINTEXT_LISTENER=yes
-      - KAFKA_CFG_LOG_DIRS=/tmp/kafka_mounts/logs
-      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://172.17.0.1:9093
-      - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://0.0.0.0:9093 
-      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
-      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
+    env_file:
+      - conf/kafka.env
     depends_on:
       - zookeeper
 
@@ -49,9 +38,5 @@ services:
       - mqtt-source
     ports:
       - "9021:8080"
-    environment:
-      KAFKA_CLUSTERS_0_NAME: 'MataElangLab'
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: 'kafka:9092'
-      KAFKA_CLUSTERS_0_ZOOKEEPER: 'zookeeper:2181'
-      KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME: 'MataElangLabConnector'
-      KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS: 'http://connect:8083'
+    env_file:
+      - conf/control-center.env
