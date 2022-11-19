@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 
 x-spark-default-env: &spark-default-env
   SPARK_NO_DAEMONIZE: true
