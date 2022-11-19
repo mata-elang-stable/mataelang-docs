@@ -1,66 +1,52 @@
 version: '3'
+
+x-spark-default-env: &spark-default-env
+  SPARK_NO_DAEMONIZE: true
+  SPARK_SCALA_VERSION: 2.13
+
 services:
   spark-master:
-    image: apache/spark
-    container_name: spark-master
-    hostname: spark-master
-    user: 0:0
+    image: apache/spark:3.3.1
     ports:
       - "8180:8080"
       - "7077:7077"
     environment:
-      - SPARK_MASTER_HOST=spark-master
-      - SPARK_MASTER_PORT=7077
-      - SPARK_MASTER_WEBUI_PORT=8080
-      - SPARK_NO_DAEMONIZE=true
+      <<: *spark-default-env
+      SPARK_MASTER_HOST: spark-master
+      SPARK_MASTER_PORT: 7077
+      SPARK_MASTER_WEBUI_PORT: 8080
     command: >
       bash -c "/opt/spark/sbin/start-master.sh"
-      
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '2'
+          memory: 2G
 
-  spark-worker-1:
-    image: apache/spark
-    container_name: spark-worker-1
-    hostname: spark-worker-1
-    user: 0:0
+  spark-worker:
+    image: apache/spark:3.3.1
     depends_on:
       - spark-master
-    ports:
-      - "8181:8081"
     environment:
-      - SPARK_WORKER_WEBUI_PORT=8082
-      - SPARK_MASTER=spark://spark-master:7077
-      - SPARK_NO_DAEMONIZE=true
+      <<: *spark-default-env
+      SPARK_MASTER: spark://spark-master:7077
+      SPARK_WORKER_CORES: 1
+      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_DIR: /tmp/worker
     command: >
       bash -c "/opt/spark/sbin/start-worker.sh $$SPARK_MASTER"
-
-  spark-worker-2:
-    image: apache/spark
-    container_name: spark-worker-2
-    hostname: spark-worker-2
-    user: 0:0
-    depends_on:
-      - spark-master
-    ports:
-      - "8182:8081"
-    environment:
-      - SPARK_WORKER_WEBUI_PORT=8081
-      - SPARK_MASTER=spark://spark-master:7077
-      - SPARK_NO_DAEMONIZE=true
-    command: >
-      bash -c "/opt/spark/sbin/start-worker.sh $$SPARK_MASTER"
-
-  spark-worker-3:
-    image: apache/spark
-    container_name: spark-worker-3
-    hostname: spark-worker-3
-    user: 0:0
-    depends_on:
-      - spark-master
-    ports:
-      - "8183:8081"
-    environment:
-      - SPARK_WORKER_WEBUI_PORT=8081
-      - SPARK_MASTER=spark://spark-master:7077
-      - SPARK_NO_DAEMONIZE=true
-    command: >
-      bash -c "/opt/spark/sbin/start-worker.sh $$SPARK_MASTER"
+    deploy:
+      mode: replicated
+      replicas: 3
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '1'
+          memory: 1G
