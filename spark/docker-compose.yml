@@ -1,0 +1,52 @@
+version: '3.4'
+
+x-spark-default-env: &spark-default-env
+  SPARK_NO_DAEMONIZE: true
+  SPARK_SCALA_VERSION: 2.13
+
+services:
+  spark-master:
+    image: mfscy/spark:3.3.1-scala2.13
+    ports:
+      - "8180:8080"
+      - "7077:7077"
+    environment:
+      <<: *spark-default-env
+      SPARK_MASTER_HOST: spark-master
+      SPARK_MASTER_PORT: 7077
+      SPARK_MASTER_WEBUI_PORT: 8080
+    command: >
+      bash -c "/opt/spark/sbin/start-master.sh"
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '2'
+          memory: 2G
+
+  spark-worker:
+    image: mfscy/spark:3.3.1-scala2.13
+    depends_on:
+      - spark-master
+    environment:
+      <<: *spark-default-env
+      SPARK_MASTER: spark://spark-master:7077
+      SPARK_WORKER_CORES: 1
+      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_DIR: /tmp/worker
+    command: >
+      bash -c "/opt/spark/sbin/start-worker.sh $$SPARK_MASTER"
+    deploy:
+      mode: replicated
+      replicas: 3
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '1'
+          memory: 1G
