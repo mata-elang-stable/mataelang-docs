@@ -6,6 +6,14 @@ services:
     container_name: mqtt-source
     env_file:
       - conf/mqtt-source.env
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 64M
+        reservations:
+          cpus: '0.25'
+          memory: 32M
 
   zookeeper:
     image: 'bitnami/zookeeper:latest'
@@ -15,6 +23,14 @@ services:
       - '2181:2181'
     env_file:
       - conf/zookeeper.env
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
 
   kafka:
     image: 'bitnami/kafka:latest'
@@ -27,6 +43,14 @@ services:
       - conf/kafka.env
     depends_on:
       - zookeeper
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 2G
+        reservations:
+          cpus: '0.25'
+          memory: 1G
 
   control-center:
     image: provectuslabs/kafka-ui
@@ -39,3 +63,11 @@ services:
       - "9021:8080"
     env_file:
       - conf/control-center.env
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 768M
+        reservations:
+          cpus: '0.25'
+          memory: 384M
