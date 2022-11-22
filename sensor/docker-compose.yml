@@ -21,17 +21,25 @@ services:
           cpus: '0.7'
           memory: 256M
 
+###########################
+#         Note            #
+###########################
+# String/text `<machine-id>` will be replaced with content from /etc/machine-id
+# String/text `<sensor-id>` will be replaced with content from SENSOR_ID env var
+#
+
   me-sensor-snort-parser:
     image: mfscy/snort3-parser:latest
     depends_on:
       - me-sensor-snort
     restart: always
     environment:
-      - MQTT_HOST=192.168.1.121
+      - MQTT_HOST=192.168.1.1
       - MQTT_PORT=1883
       # - MQTT_USERNAME=username
       # - MQTT_PASSWORD=password
-      - MQTT_TOPIC=mataelang/sensor/v3/<machine-id>
+      - SENSOR_ID=<machine-id>
+      - MQTT_TOPIC=mataelang/sensor/v3/<sensor-id>
       - SNORT_ALERT_FILE_PATH=/var/log/snort/alert_json.txt
     volumes:
       - /etc/machine-id:/etc/machine-id:ro
