@@ -268,11 +268,12 @@ rate_filter =
 
 alert_json = {
     file = true,
+    limit = 50,
+    fields = 'action b64_data class client_bytes client_pkts dir dst_addr dst_ap dst_port eth_dst eth_len eth_src eth_type flowstart_time geneve_vni gid icmp_code icmp_id icmp_seq icmp_type iface ip_id ip_len mpls msg pkt_gen pkt_len pkt_num priority proto rev rule seconds server_bytes server_pkts service sgt sid src_addr src_ap src_port target tcp_ack tcp_flags tcp_len tcp_seq tcp_win timestamp tos ttl udp_len vlan'
+}
+
+log_pcap = {
     limit = 100,
-    fields = 'seconds action class b64_data dir dst_addr dst_ap dst_port eth_dst eth_len \
-        eth_src eth_type gid icmp_code icmp_id icmp_seq icmp_type iface ip_id ip_len msg mpls \
-        pkt_gen pkt_len pkt_num priority proto rev rule service sid src_addr src_ap src_port \
-        target tcp_ack tcp_flags tcp_len tcp_seq tcp_win tos ttl udp_len vlan timestamp',
 }
 
 ---------------------------------------------------------------------------
