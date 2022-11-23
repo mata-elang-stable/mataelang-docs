@@ -1,0 +1,14 @@
+version: '3'
+
+volumes:
+  mosquitto_data:
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - mosquitto_data:/mosquitto/data
+    ports:
+      - 172.17.0.1:1883:1883
+      - 9001:9001

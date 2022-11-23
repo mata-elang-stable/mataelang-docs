@@ -2,7 +2,7 @@ volumes:
   snort_data:
 
 services:
-  me-sensor-snort:
+  snort:
     build: 
       context: snort/
     network_mode: host
@@ -28,10 +28,10 @@ services:
 # String/text `<sensor-id>` will be replaced with content from SENSOR_ID env var
 #
 
-  me-sensor-snort-parser:
+  snort-parser:
     image: mfscy/snort3-parser:latest
     depends_on:
-      - me-sensor-snort
+      - snort
     restart: always
     environment:
       - MQTT_HOST=192.168.1.1

@@ -2,6 +2,7 @@ FROM mfscy/snort-base:3
 
 COPY pulledpork.conf /usr/local/etc/pulledpork/pulledpork.conf
 COPY snort.lua /usr/local/etc/snort/snort.lua
+COPY local.rules /usr/local/etc/rules/local.rules
 
 RUN pulledpork.py -c /usr/local/etc/pulledpork/pulledpork.conf
 
