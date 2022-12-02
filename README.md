@@ -65,11 +65,11 @@ There are 2 method for online installation :
 #### Manual Installation
 For manual Mata Elang components installation there are several folders in this repository that contain the guidance for the installation :
 
-1. Sensor Snort : `sensor` folder
-2. Mosquitto (MQTT Broker): `mosquitto` folder
-3. Apache Kafka : `kafka` folder
-4. Kaspacore & Apache Spark : `spark` folder
-5. OpenSearch & OpenSearch Dasboard: `opensearch` folder
+1. Sensor Snort : [sensor](sensor/README.md) folder
+2. Mosquitto (MQTT Broker): [mosquitto](mosquitto/README.md) folder
+3. Apache Kafka : [kafka](kafka/README.md) folder
+4. Kaspacore & Apache Spark : [spark](spark/README.md) folder
+5. OpenSearch & OpenSearch Dasboard: [opensearch](opensearch/README.md) folder
 
 #### Automated Installation
 For automated Mata Elang components installation will be applied using Ansible Automation process that refer to this repository:
