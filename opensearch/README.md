@@ -7,7 +7,34 @@
 
 ## Usage
 
-**1. Configure Stream Pipeline Configuration in `pipeline.conf` file.**
+**1. Add Minimum VM Memory Maps for Opensearch**
+
+- Open the system kernel configuration file
+```bash
+sudo nano /etc/sysctl.conf
+```
+
+- Add this line inside the configuration file
+```
+vm.max_map_count=262144
+```
+
+- Reload the kernel parameter
+```bash
+sudo sysctl -p
+```
+
+- Verify the system change by checking the system value
+```
+cat /proc/sys/vm/max_map_count
+```
+
+- The correct output for this process
+```
+262144
+```
+
+**2. Configure Stream Pipeline Configuration in `pipeline.conf` file.**
 
 - You need to configure the input variable in pipeline.conf
 ```
@@ -27,7 +54,7 @@ opensearch {
 
 ```
 
-**2. Start OpenSearch services and confirm the services are up.**
+**3. Start OpenSearch services and confirm the services are up.**
 ```
 sudo docker-compose up -d
 ```
@@ -35,11 +62,11 @@ sudo docker-compose up -d
 ```
 sudo docker-compose ps
 ```
-**3. Open the following URL in your browser to see the dashboard.**
+**4. Open the following URL in your browser to see the dashboard.**
 
 - URL: `http://<OpenSearch Dashboard (e.g. 10.10.10.40)>:5061/`
 ![image-1.png](./image-1.png)
-**4. On the Dashboard sidebar go to "Stack Management" -> "Index Pattern" -> "Create Index Pattern"**
+**5. On the Dashboard sidebar go to "Stack Management" -> "Index Pattern" -> "Create Index Pattern"**
 ![image.png](./image.png)
-**5. Go to "Stack Management" -> "Index Pattern" -> "Saved Object" and import `mata-elang-template.ndjson` file for dashboard visualization**
+**6. Go to "Stack Management" -> "Index Pattern" -> "Saved Object" and import `mata-elang-template.ndjson` file for dashboard visualization**
 ![image-2.png](./image-2.png)
