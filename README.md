@@ -1,4 +1,14 @@
-standard component
-standard procedure
-all hardware n software requirement
-offline, online, installation media procedure
+# Installations
+## Components
+
+## Requirements
+### Hardware
+### Software
+
+## Install Preparations
+### Installation Media Procedures
+
+## Offline Installations
+## Online Installations
+
+
