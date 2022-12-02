@@ -29,9 +29,31 @@ Mata Elang project, consists of following general components, and the technologi
 - Data Presentation: Kibana
 
 ## Requirements
-### Hardware
 ### Software
+- Operating System: Ubuntu / Debian based OS
+- Docker
+### Hardware
+#### Sensor
+- CPU Core 2 Duo
+- Gigabit LAN card
+- 2 GB of RAM
+- 100 GB of HDD
 
+#### Data Processing
+- CPU Intel Core i7 / AMD Ryzen 7
+- Gigabit LAN card
+- 16 GB of RAM
+- 500 GB of HDD
+#### Data Storage
+- CPU Intel Core i3 / AMD Ryzen 3
+- Gigabit LAN card
+- 4 GB of RAM
+- 1 TB of HDD
+#### Data Presentation
+- CPU Intel Core 2 Duo
+- LAN card
+- 4 GB of RAM
+- 500 GB of HDD
 ## Install Preparations
 ### Installation Media Procedures
 
