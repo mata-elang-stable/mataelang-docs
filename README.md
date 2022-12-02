@@ -37,5 +37,30 @@ Mata Elang project, consists of following general components, and the technologi
 
 ## Offline Installations
 ## Online Installations
+For the online installation you need a stable internet connection to download all necessary dependencies and components from our repository.
+There are 2 method for online installation :
 
+#### Manual Installation
+For manual Mata Elang components installation there are several folders in this repository that contain the guidance for the installation :
+
+1. Sensor Snort : `sensor` folder
+2. Mosquitto (MQTT Broker): `mosquitto` folder
+3. Apache Kafka : `kafka` folder
+4. Kaspacore & Apache Spark : `spark` folder
+5. OpenSearch & OpenSearch Dasboard: `opensearch` folder
+
+#### Automated Installation
+For automated Mata Elang components installation will be applied using Ansible Automation process that refer to this repository:
+
+- Change to Root Directory
+```bash
+cd ~/
+```
+
+- Clone Git Repository
+```bash
+git clone https://gitlab.com/mata-elang/stable/mataelang-ansible-roles.git
+```
+
+For more Automated Installation procedure could be referred to: https://gitlab.com/mata-elang/stable/mataelang-ansible-roles
 
