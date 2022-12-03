@@ -30,7 +30,7 @@ Mata Elang project, consists of following general components, and the technologi
 
 ## Requirements
 ### Software
-- Operating System: Ubuntu / Debian based OS
+- Operating System: Ubuntu 20.04 / Debian 9 based OS
 - Docker
 ### Hardware
 #### Sensor
