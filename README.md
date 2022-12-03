@@ -56,8 +56,9 @@ Mata Elang project, consists of following general components, and the technologi
 - 500 GB of HDD
 ## Install Preparations
 ### Installation Media Procedures
-
+Currently we're using USD drive to store all dependencies for the project.
 ## Offline Installations
+For offline installation purpose, we will be using the Ansible technology to automate the process.
 ## Online Installations
 For the online installation you need a stable internet connection to download all necessary dependencies and components from our repository.
 There are 2 method for online installation :
