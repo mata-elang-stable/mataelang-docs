@@ -20,6 +20,7 @@ Mata Elang project, consists of following general components, and the technologi
 - Zabbix: 6.0.1 LTS
 - MariaDB: 10.6.8 LTS
 - Apache HTTP Server: 2.4.54
+- Ansible
 
 ### Processing Stages Components
 - Sensor: Snort
@@ -59,9 +60,12 @@ Mata Elang project, consists of following general components, and the technologi
 Currently we're using USD drive to store all dependencies for the project.
 ## Offline Installations
 For offline installation purpose, we will be using the Ansible technology to automate the process.
+Please refer to [this](ansible/README.md) folder for Ansible offline install
 ## Online Installations
 For the online installation you need a stable internet connection to download all necessary dependencies and components from our repository.
 There are 2 method for online installation :
+1. 
+2. 
 
 #### Manual Installation
 For manual Mata Elang components installation there are several folders in this repository that contain the guidance for the installation :
