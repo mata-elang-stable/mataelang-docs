@@ -17,16 +17,18 @@ services:
       SPARK_MASTER_WEBUI_PORT: 8080
     command: >
       bash -c "/opt/spark/sbin/start-master.sh"
+    volumes:
+      - ./app.properties:/opt/spark/conf/app.properties
     deploy:
       mode: replicated
       replicas: 1
       resources:
         limits:
-          cpus: '2'
-          memory: 2G
+          cpus: '1'
+          memory: 1G
         reservations:
-          cpus: '2'
-          memory: 2G
+          cpus: '1'
+          memory: 1G
 
   spark-worker:
     image: mfscy/spark:3.3.1-scala2.13
@@ -39,7 +41,9 @@ services:
       SPARK_WORKER_MEMORY: 1G
       SPARK_WORKER_DIR: /tmp/worker
     command: >
-      bash -c "/opt/spark/sbin/start-worker.sh $$SPARK_MASTER"
+      bash -c "/opt/spark/sbin/start-worker.sh -h $(hostname -I | cut -d' ' -f1) $$SPARK_MASTER"
+    volumes:
+      - ./app.properties:/opt/spark/conf/app.properties
     deploy:
       mode: replicated
       replicas: 3
