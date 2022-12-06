@@ -34,6 +34,8 @@ services:
     image: mfscy/spark:3.3.1-scala2.13
     depends_on:
       - spark-master
+    ports:
+      - "8181-8183:8081"
     environment:
       <<: *spark-default-env
       SPARK_MASTER: spark://spark-master:7077
