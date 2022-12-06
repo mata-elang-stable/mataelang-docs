@@ -30,9 +30,25 @@ spark-worker-3   /opt/entrypoint.sh bash -c ...   Up      0.0.0.0:8183->8081/tcp
 
 1. SensorEnrichDataStreamJob
 ```bash
-docker compose exec -it -w /opt/spark spark-master /opt/spark/bin/spark-submit --master spark://spark-master:7077 --class org.mataelang.kaspacore.jobs.SensorEnrichDataStreamJob --total-executor-cores 1 --conf spark.submit.deployMode=cluster --conf spark.executor.cores=1 --conf spark.executor.memory=1g --files conf/app.properties hdfs://172.17.0.1:9000/user/hadoop/kaspacore/files/kaspacore.jar
+docker compose exec -it -w /opt/spark spark-master /opt/spark/bin/spark-submit \
+     --master spark://spark-master:7077 \
+     --class org.mataelang.kaspacore.jobs.SensorEnrichDataStreamJob \
+     --total-executor-cores 1 \
+     --conf spark.submit.deployMode=cluster \
+     --conf spark.executor.cores=1 \
+     --conf spark.executor.memory=1g \
+     --files conf/app.properties \
+     hdfs://172.17.0.1:9000/user/hadoop/kaspacore/files/kaspacore.jar
 ```
 2. SensorAggregationStreamJob
 ```bash
-docker compose exec -it -w /opt/spark spark-master /opt/spark/bin/spark-submit --master spark://spark-master:7077 --class org.mataelang.kaspacore.jobs.SensorAggregationStreamJob --total-executor-cores 1 --conf spark.submit.deployMode=cluster --conf spark.executor.cores=1 --conf spark.executor.memory=1g --files conf/app.properties hdfs://172.17.0.1:9000/user/hadoop/kaspacore/files/kaspacore.jar
+docker compose exec -it -w /opt/spark spark-master /opt/spark/bin/spark-submit \
+     --master spark://spark-master:7077 \
+     --class org.mataelang.kaspacore.jobs.SensorAggregationStreamJob \
+     --total-executor-cores 1 \
+     --conf spark.submit.deployMode=cluster \
+     --conf spark.executor.cores=1 \
+     --conf spark.executor.memory=1g \
+     --files conf/app.properties \
+     hdfs://172.17.0.1:9000/user/hadoop/kaspacore/files/kaspacore.jar
 ```
