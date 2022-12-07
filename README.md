@@ -1,3 +1,5 @@
+![Mata Elang Stable](.images/mata-elang-stable-logo.png)
+
 # Mata Elang
 This project currently in active development of 1.1 version
 # Installations
