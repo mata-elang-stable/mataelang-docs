@@ -65,8 +65,8 @@ sudo docker-compose ps
 **4. Open the following URL in your browser to see the dashboard.**
 
 - URL: `http://<OpenSearch Dashboard (e.g. 10.10.10.40)>:5061/`
-![image-1.png](./image-1.png)
+![opensearch-dashboard.png](../.images/opensearch-dashboard.png)
 **5. On the Dashboard sidebar go to "Stack Management" -> "Index Pattern" -> "Create Index Pattern"**
-![image.png](./image.png)
+![index-pattern.png](../.images/index-pattern.png)
 **6. Go to "Stack Management" -> "Index Pattern" -> "Saved Object" and import `mata-elang-template.ndjson` file for dashboard visualization**
-![image-2.png](./image-2.png)
+![import-template.png](../.images/import-template.png)
