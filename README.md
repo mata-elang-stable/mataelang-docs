@@ -1,4 +1,4 @@
-![Mata Elang Stable](.images/mata-elang-stable-logo.png)
+<img src=".images/mata-elang-stable-logo.png" align="center" width="200">
 
 # Mata Elang
 This project currently in active development of 1.1 version
