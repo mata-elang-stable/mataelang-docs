@@ -64,8 +64,8 @@ Please refer to [this](ansible/README.md) folder for Ansible offline install
 ## Online Installations
 For the online installation you need a stable internet connection to download all necessary dependencies and components from our repository.
 There are 2 method for online installation :
-1. [Manual Installation](####manual-installation)
-2. [Automated Installation](####automated-installation)
+1. [Manual Installation](#manual-installation)
+2. [Automated Installation](#automated-installation)
 
 #### Manual Installation
 For manual Mata Elang components installation there are several folders in this repository that contain the guidance for the installation :
