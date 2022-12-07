@@ -48,7 +48,7 @@ services:
       - ./app.properties:/opt/spark/conf/app.properties
     deploy:
       mode: replicated
-      replicas: 3
+      replicas: 4
       resources:
         limits:
           cpus: '1'
