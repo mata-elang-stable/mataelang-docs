@@ -1,6 +1,6 @@
 # Offline Installation
 
-## Prerequisite
+## Prerequisites
 
 - [x] Install Python 3.8
 - [x] Install ansible
