@@ -94,7 +94,9 @@ cd ~/
 git clone https://gitlab.com/mata-elang/stable/mataelang-ansible-roles.git
 ```
 
-For more Automated Installation procedure could be referred to: https://gitlab.com/mata-elang/stable/mataelang-ansible-roles
+For further information, please refer to: 
+- [Ansible documentation](ansible/README.md)
+- https://gitlab.com/mata-elang/stable/mataelang-ansible-roles
 
 # Usage
 Please refer to [USAGE.md](USAGE.md) document
