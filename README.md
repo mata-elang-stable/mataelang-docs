@@ -1,6 +1,9 @@
-<img src=".images/mata-elang-stable-logo.png" align="center" width="200">
+<div style="text-align: center">
+	<img src=".images/mata-elang-stable-logo.png" width="200">
 
 # Mata Elang
+</div>
+
 This project currently in active development of 1.1 version
 # Installations
 ## Components
