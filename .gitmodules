@@ -1,0 +1,3 @@
+[submodule "ansible/me-ansible-roles"]
+	path = ansible/me-ansible-roles
+	url = git@gitlab.com:mata-elang/stable/mataelang-ansible-roles.git
