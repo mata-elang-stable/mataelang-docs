@@ -1,7 +1,7 @@
-<div style="text-align: center">
-	<img src=".images/mata-elang-stable-logo.png" width="200">
 
-# Mata Elang
+<div align="center">
+  <img src=".images/mata-elang-stable-logo.png" alt="logo" width="200">
+  <h1>Mata Elang</h1>
 </div>
 
 This project currently in active development of 1.1 version
