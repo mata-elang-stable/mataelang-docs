@@ -97,3 +97,6 @@ For further information, please refer to:
 
 # Usage
 Please refer to [USAGE.md](USAGE.md) document
+
+# Backup
+Please refer to [BACKUP.md](BACKUP.md) document
