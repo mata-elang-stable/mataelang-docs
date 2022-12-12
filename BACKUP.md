@@ -118,6 +118,31 @@ got 0 objects from source file (offset: 2100)
 Total Writes: 2100
 dump complete
 ```
+**3. Verify the restored data in your index pattern**
+- via Dashboard
+  - check on Index Pattern tab
+  ![image.png](./image.png)
+  - click on the Create Index Pattern Button, and check if your restored index data name already seen in the pattern
+  ![image-1.png](./image-1.png)
+- via curl
+using this command :
+```
+curl https://<YOUR_OPENSEARCH_USERNAME>:<YOUR_OPENSEARCH_PASSWORD>@<YOUR_HOST_IP_ADDRESS>:9200/<YOUR_INDEX_DATA_NAME>/_search
+```
+
+example:
+```
+curl https://admin:admin@localhost:9200/event-all-10s-backup/_search
+```
+
+Output:
+![image-2.png](./image-2.png)
+
+Note:
+if you have a problem with your TLS certificate, please use this command :
+```
+curl https://<YOUR_OPENSEARCH_USERNAME>:<YOUR_OPENSEARCH_PASSWORD>@<YOUR_HOST_IP_ADDRESS>:9200/<YOUR_INDEX_DATA_NAME>/_search --insecure
+```
 ## References
 - https://fitdevops.in/elasticdump-to-backup-restore-indexes/
 
