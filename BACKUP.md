@@ -57,7 +57,7 @@ pwd
 
 #### Backup Index Data Into File 
 
-**1. Backup the mapping of the index data **
+**1. Backup the mapping of the index data**
 ```
 NODE_TLS_REJECT_UNAUTHORIZED=0 elasticdump --input=https://<YOUR_OPENSEARCH_USERNAME>:<YOUR_OPENSEARCH_PASSWORD>@<YOUR_HOST_IP>:9200/<YOUR_INDEX_NAME> --output=/<YOUR_DIRECTORY>/os-backup/<YOUR_BACKUP_FILE_NAME>_mapping.json --type=mapping
 ```
