@@ -21,7 +21,6 @@ Mata Elang project, consists of following general components, and the technologi
 - Scala: 2.13
 - Hadoop: 3.3.4 (or later)
 - OpenSearch stack: 2.4.0
-- Zabbix: 6.0.1 LTS
 - Ansible 2.10
 
 ### Processing Stages Components
