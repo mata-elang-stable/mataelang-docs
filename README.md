@@ -12,7 +12,7 @@ Mata Elang project, consists of following general components, and the technologi
 - Container Runtime: 
 	- Docker Engine 20.10.12
 	- Docker Compose 1.25.0
-- Java / OpenJDK: 17.0.5 LTS
+- Java / OpenJDK: 11.0 LTS
 - Snort: 3.1.47.0 (or later)
 - PulledPork: Upgraded to PulledPork 3
 - Mosquitto: 2.0.15
