@@ -19,7 +19,15 @@ Elasticdump can be obtained from NPM repository.
 # apt install nodejs
 ```
 #### Install Elasticdump
+```
+# npm install elasticdump -g
+```
 
+### Backup Examples
+```
+# elasticdump --input=http://<elastic-host>:9200/index_name --output=backup-mapping.json --type=mapping
+# elasticdump --input=http://<elastic-host>:9200/index_name --output=backup.json --type=data
+```
 
 ## References
 - https://fitdevops.in/elasticdump-to-backup-restore-indexes/
