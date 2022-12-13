@@ -32,9 +32,9 @@ elif [ "$1" = "update-rules" ]; then
     $docker_compose_path build
     $docker_compose_path up -d snort
 elif [ "$1" = "set-automation" ]; then
-	
+	echo "setting crontab"
 elif [ "$1" = "unset-automation" ]; then
-
+	echo "unsetting crontab"
 else
     $docker_compose_path up -d
 fi
