@@ -2,7 +2,7 @@
 
 script_dir="$( dirname -- "$( readlink -f -- "$0"; )"; )"
 script_path="$script_dir/run.sh"
-cron_schedule="0 * * * *"
+cron_schedule="0 0 * * SUN"
 
 if [ "$1" = "test" ]; then 
 	echo "CRON RUNNER TEST PATH"
