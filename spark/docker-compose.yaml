@@ -124,7 +124,6 @@ services:
       SPARK_APP_CLASSNAME: org.mataelang.kaspacore.jobs.SensorEnrichDataStreamJob
     command: >
       bash -c "sleep 5 && /opt/spark/bin/spark-submit \\
-          --master spark://$$SPARK_MASTER_HOST:$$SPARK_MASTER_PORT \\
           --class $$SPARK_APP_CLASSNAME \\
           --total-executor-cores $$TOTAL_EXECUTOR_CORES \\
           --conf spark.submit.deployMode=$$DEPLOY_MODE \\
@@ -157,7 +156,6 @@ services:
       SPARK_APP_CLASSNAME: org.mataelang.kaspacore.jobs.SensorAggregationStreamJob
     command: >
       bash -c "sleep 5 && /opt/spark/bin/spark-submit \\
-          --master spark://$$SPARK_MASTER_HOST:$$SPARK_MASTER_PORT \\
           --class $$SPARK_APP_CLASSNAME \\
           --total-executor-cores $$TOTAL_EXECUTOR_CORES \\
           --conf spark.submit.deployMode=$$DEPLOY_MODE \\
