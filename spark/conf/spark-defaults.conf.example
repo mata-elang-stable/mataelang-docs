@@ -1,0 +1,10 @@
+# History Server
+spark.history.ui.port=18080
+spark.history.retainedApplications=10
+spark.history.fs.update.interval=10s
+spark.history.fs.cleaner.enabled=true
+spark.history.fs.cleaner.interval=1d
+spark.history.fs.cleaner.maxAge=7d
+
+# App Configuration
+spark.eventLog.enabled=true
