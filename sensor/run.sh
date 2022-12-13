@@ -1,6 +1,6 @@
 #!/bin/bash
 
-script_path="$(dirname --"$0")/run.sh"
+script_path="$( dirname -- "$( readlink -f -- "$0"; )"; )/run.sh"
 
 if [ "$1" = "test" ]; then 
 	echo "CRON RUNNER TEST PATH"
