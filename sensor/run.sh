@@ -1,6 +1,7 @@
 #!/bin/bash
 
-script_path="$( dirname -- "$( readlink -f -- "$0"; )"; )/run.sh"
+script_dir="$( dirname -- "$( readlink -f -- "$0"; )"; )"
+script_path="$script_dir/run.sh"
 
 if [ "$1" = "test" ]; then 
 	echo "CRON RUNNER TEST PATH"
@@ -21,7 +22,7 @@ unset_crontab(){
 
 set_crontab(){
 	unset_crontab
-	(crontab -l ; echo "* * * * * $script_path") | crontab -
+	(crontab -l ; echo "* * * * * $script_path test >> $script_dir/run.log") | crontab -
 }
 
 docker_compose_path="docker compose"
