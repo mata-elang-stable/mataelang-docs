@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ "$1" = "test" ]; then 
+	echo "CRON RUNNER TEST PATH"
+	echo $PATH
+	exit 1
+fi
+
 docker_compose_path="docker compose"
 
 # Check if Docker Engine already installed
@@ -28,9 +34,6 @@ elif [ "$1" = "set-automation" ]; then
 	
 elif [ "$1" = "unset-automation" ]; then
 
-elif [ "$1" = "test" ]; then 
-	echo "CRON RUNNER TEST PATH"
-	echo $PATH
 else
     $docker_compose_path up -d
 fi
