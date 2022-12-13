@@ -58,14 +58,38 @@ environment:
 
 **1. Start Snort services and confirm the services are up**
 
-```bash
-sudo docker-compose up -d
+There is a wrapper shell script called run.sh for docker compose, please run as root.
+
+```
+$ sudo su -
+# ./run.sh
+```
+This equals to
+```
+$ sudo su -
+# docker-compose up -d
 ```
 
 ### Check running service
 
-```bash
-sudo docker-compose ps
+```
+# docker-compose ps
+```
+Please ensure that Snort and Snort-parser container statuses are UP
+
+### Configure Snort Rule Auto Update (Optional)
+This command will add a line into crontab:
+
+```
+# ./run.sh set-automation
 ```
 
-- Ensure that Snort and Snort-parser container status is UP
+Check with:
+```
+# crontab -l
+```
+
+To disable auto updater:
+```
+# ./run.sh unset-automation
+```
