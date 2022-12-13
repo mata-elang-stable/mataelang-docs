@@ -1,25 +1,32 @@
 version: '3.4'
 
-x-spark-default-env: &spark-default-env
+x-spark-default-env:
+  &spark-default-env
   SPARK_NO_DAEMONIZE: true
   SPARK_SCALA_VERSION: 2.13
-  HADOOP_USER_NAME: hadoop
+
+x-spark-default:
+  &spark-default
+  env_file: .env
+  volumes:
+    - ./conf/app.properties:/opt/spark/conf/app.properties
+    - ./conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
+    # - ./conf/log4j2.properties:/opt/spark/conf/log4j2.properties # optional
 
 services:
   spark-master:
-    image: mfscy/spark:3.3.1-scala2.13
+    <<: *spark-default
+    image: mataelang/spark:3.3.1-scala2.13
     ports:
-      - "8180:8080"
-      - "7077:7077"
+      - "8080:8080"
     environment:
       <<: *spark-default-env
       SPARK_MASTER_HOST: spark-master
       SPARK_MASTER_PORT: 7077
       SPARK_MASTER_WEBUI_PORT: 8080
+      SPARK_DAEMON_MEMORY: 1g
     command: >
       bash -c "/opt/spark/sbin/start-master.sh"
-    volumes:
-      - ./app.properties:/opt/spark/conf/app.properties
     deploy:
       mode: replicated
       replicas: 1
@@ -32,25 +39,63 @@ services:
           memory: 1G
 
   spark-worker:
-    image: mfscy/spark:3.3.1-scala2.13
+    <<: *spark-default
+    image: mataelang/spark:3.3.1-scala2.13
     depends_on:
       - spark-master
-    ports:
-      - "8181-8184:8081"
-      - "4041-4044:4040"
+    # ports:
+    #   - "8181-8182:8081"
+    #   - "4041-4042:4040"
     environment:
       <<: *spark-default-env
       SPARK_MASTER: spark://spark-master:7077
       SPARK_WORKER_CORES: 1
       SPARK_WORKER_MEMORY: 1G
-      SPARK_WORKER_DIR: /tmp/worker
+      SPARK_WORKER_DIR: /opt/spark/work-dir
     command: >
       bash -c "/opt/spark/sbin/start-worker.sh -h $(hostname -I | cut -d' ' -f1) $$SPARK_MASTER"
-    volumes:
-      - ./app.properties:/opt/spark/conf/app.properties
     deploy:
       mode: replicated
-      replicas: 4
+      replicas: 2
+    
+  spark-worker-bigmemory:
+    <<: *spark-default
+    image: mataelang/spark:3.3.1-scala2.13
+    depends_on:
+      - spark-master
+    # ports:
+    #   - "8183-8184:8081"
+    #   - "4043-4044:4040"
+    environment:
+      <<: *spark-default-env
+      SPARK_MASTER: spark://spark-master:7077
+      SPARK_WORKER_CORES: 1
+      SPARK_WORKER_MEMORY: 2G
+      SPARK_WORKER_DIR: /opt/spark/work-dir
+    command: >
+      bash -c "/opt/spark/sbin/start-worker.sh -h $(hostname -I | cut -d' ' -f1) $$SPARK_MASTER"
+    deploy:
+      mode: replicated
+      replicas: 2
+
+  spark-historyserver:
+    <<: *spark-default
+    image: mataelang/spark:3.3.1-scala2.13
+    depends_on:
+      - spark-master
+    ports:
+      - target: 18080
+        published: 18080
+        protocol: tcp
+        mode: host
+    environment:
+      <<: *spark-default-env
+      SPARK_DAEMON_MEMORY: 1G
+    command: >
+      bash -c "/opt/spark/sbin/start-history-server.sh"
+    deploy:
+      mode: replicated
+      replicas: 1
       resources:
         limits:
           cpus: '1'
@@ -58,3 +103,71 @@ services:
         reservations:
           cpus: '1'
           memory: 1G
+
+  spark-submit-enrich:
+    <<: *spark-default
+    image: mataelang/spark:3.3.1-scala2.13
+    restart: "no"
+    depends_on:
+      - spark-master
+      - spark-worker
+    working_dir: /opt/spark
+    environment:
+      <<: *spark-default-env
+      SPARK_MASTER_HOST: spark-master
+      SPARK_MASTER_PORT: 7077
+      DEPLOY_MODE: cluster
+      TOTAL_EXECUTOR_CORES: 1
+      SPARK_DRIVER_MEMORY: 1g
+      SPARK_EXECUTOR_CORES: 1
+      SPARK_EXECUTOR_MEMORY: 1g
+      SPARK_APP_CLASSNAME: org.mataelang.kaspacore.jobs.SensorEnrichDataStreamJob
+    command: >
+      bash -c "sleep 5 && /opt/spark/bin/spark-submit \\
+          --master spark://$$SPARK_MASTER_HOST:$$SPARK_MASTER_PORT \\
+          --class $$SPARK_APP_CLASSNAME \\
+          --total-executor-cores $$TOTAL_EXECUTOR_CORES \\
+          --conf spark.submit.deployMode=$$DEPLOY_MODE \\
+          --conf spark.driver.memory=$$SPARK_DRIVER_MEMORY \\
+          --conf spark.executor.cores=$$SPARK_EXECUTOR_CORES \\
+          --conf spark.executor.memory=$$SPARK_EXECUTOR_MEMORY \\
+          --conf spark.eventLog.dir=$$SPARK_EVENTLOG_DIR \\
+          --files conf/app.properties \\
+          $$SPARK_APP_JAR_PATH
+          "
+
+  spark-submit-aggr:
+    <<: *spark-default
+    image: mataelang/spark:3.3.1-scala2.13
+    restart: "no"
+    depends_on:
+      - spark-master
+      - spark-worker-bigmemory
+    working_dir: /opt/spark
+    environment:
+      <<: *spark-default-env
+      SPARK_MASTER_HOST: spark-master
+      SPARK_MASTER_PORT: 7077
+      DEPLOY_MODE: cluster
+      TOTAL_EXECUTOR_CORES: 1
+      SPARK_DRIVER_MEMORY: 1g
+      SPARK_EXECUTOR_CORES: 1
+      SPARK_EXECUTOR_MEMORY: 1g
+      SPARK_SHUFFLE_PARTITION: 1
+      SPARK_APP_CLASSNAME: org.mataelang.kaspacore.jobs.SensorAggregationStreamJob
+    command: >
+      bash -c "sleep 5 && /opt/spark/bin/spark-submit \\
+          --master spark://$$SPARK_MASTER_HOST:$$SPARK_MASTER_PORT \\
+          --class $$SPARK_APP_CLASSNAME \\
+          --total-executor-cores $$TOTAL_EXECUTOR_CORES \\
+          --conf spark.submit.deployMode=$$DEPLOY_MODE \\
+          --conf spark.driver.memory=$$SPARK_DRIVER_MEMORY \\
+          --conf spark.executor.cores=$$SPARK_EXECUTOR_CORES \\
+          --conf spark.executor.memory=$$SPARK_EXECUTOR_MEMORY \\
+          --conf spark.eventLog.dir=$$SPARK_EVENTLOG_DIR \\
+          --conf spark.sql.shuffle.partitions=$$SPARK_SHUFFLE_PARTITION \\
+          --conf spark.sql.codegen.aggregate.map.twolevel.enabled=false \\
+          --conf spark.sql.streaming.metricsEnabled=true \\
+          --files conf/app.properties \\
+          $$SPARK_APP_JAR_PATH
+          "
