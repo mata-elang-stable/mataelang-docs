@@ -24,6 +24,13 @@ if [ "$1" = "build" ]; then
 elif [ "$1" = "update-rules" ]; then
     $docker_compose_path build
     $docker_compose_path up -d snort
+elif [ "$1" = "set-automation" ]; then
+	
+elif [ "$1" = "unset-automation" ]; then
+
+elif [ "$1" = "test" ]; then 
+	echo "CRON RUNNER TEST PATH"
+	echo $PATH
 else
     $docker_compose_path up -d
 fi
