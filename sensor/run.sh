@@ -1,13 +1,16 @@
 #!/bin/bash
 
+script_path="$(dirname --"$0")/run.sh"
+
 if [ "$1" = "test" ]; then 
 	echo "CRON RUNNER TEST PATH"
 	echo $PATH
+	echo $script_path
 	exit 1
 fi
 
 check_crontab(){
-	if ! [ -z "$(crontab -l | grep 'snort/run.sh')" ]; then
+	if [ -z "$(crontab -l | grep 'snort/run.sh')" ]; then
 		echo "crontab exists"
 	fi
 }
