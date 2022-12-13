@@ -10,13 +10,18 @@ if [ "$1" = "test" ]; then
 fi
 
 check_crontab(){
-	if [ -z "$(crontab -l | grep 'snort/run.sh')" ]; then
+	if [ -z "$(crontab -l | grep $script_path)" ]; then
 		echo "crontab exists"
 	fi
 }
 
+unset_crontab(){
+	crontab -l | grep -v $script_path | crontab -
+}
+
 set_crontab(){
-	check_crontab
+	unset_crontab
+	(crontab -l ; echo "* * * * * $script_path") | crontab -
 }
 
 docker_compose_path="docker compose"
