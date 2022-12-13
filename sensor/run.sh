@@ -8,6 +8,7 @@ if [ "$1" = "test" ]; then
 	echo "CRON RUNNER TEST PATH"
 	echo $PATH
 	echo $script_path
+	pwd
 	exit 1
 fi
 
@@ -45,6 +46,8 @@ if ! docker compose version &>/dev/null; then
         exit 1
     fi    
 fi
+
+cd $script_dir
 
 if [ "$1" = "build" ]; then
     $docker_compose_path build
