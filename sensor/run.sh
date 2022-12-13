@@ -47,7 +47,7 @@ if ! docker compose version &>/dev/null; then
     fi    
 fi
 
-cd $script_dir
+$docker_compose_path="$docker_compose_path --project-directory $script_dir"
 
 if [ "$1" = "build" ]; then
     $docker_compose_path build
