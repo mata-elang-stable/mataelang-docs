@@ -6,6 +6,16 @@ if [ "$1" = "test" ]; then
 	exit 1
 fi
 
+check_crontab(){
+	if ! [ -z "$(crontab -l | grep 'snort/run.sh')" ]; then
+		echo "crontab exists"
+	fi
+}
+
+set_crontab(){
+	check_crontab
+}
+
 docker_compose_path="docker compose"
 
 # Check if Docker Engine already installed
@@ -33,8 +43,10 @@ elif [ "$1" = "update-rules" ]; then
     $docker_compose_path up -d snort
 elif [ "$1" = "set-automation" ]; then
 	echo "setting crontab"
+	set_crontab
 elif [ "$1" = "unset-automation" ]; then
 	echo "unsetting crontab"
+	unset_crontab
 else
     $docker_compose_path up -d
 fi
