@@ -15,14 +15,15 @@ if ! command -v docker &>/dev/null; then
 fi
 
 if ! docker compose version &>/dev/null; then
-    # Check if old version of Docker Compose exists
+	# if return > 0, set path to old docker compose
+	docker_compose_path="docker-compose"
+    
+	# Check if old version of Docker Compose exists
     if ! command -v "$docker_compose_path" &>/dev/null; then
         echo "Docker Compose command not found."
         echo "You need to install Docker Compose command to continue."
         exit 1
-    fi
-
-    docker_compose_path="docker-compose"
+    fi    
 fi
 
 if [ "$1" = "build" ]; then
