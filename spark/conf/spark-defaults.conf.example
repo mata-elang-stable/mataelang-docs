@@ -7,4 +7,5 @@ spark.history.fs.cleaner.interval=1d
 spark.history.fs.cleaner.maxAge=7d
 
 # App Configuration
+spark.master=spark://spark-master:7077
 spark.eventLog.enabled=true
