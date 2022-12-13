@@ -2,6 +2,7 @@
 
 script_dir="$( dirname -- "$( readlink -f -- "$0"; )"; )"
 script_path="$script_dir/run.sh"
+cron_schedule="0 * * * *"
 
 if [ "$1" = "test" ]; then 
 	echo "CRON RUNNER TEST PATH"
@@ -22,7 +23,7 @@ unset_crontab(){
 
 set_crontab(){
 	unset_crontab
-	(crontab -l ; echo "* * * * * $script_path test >> $script_dir/run.log") | crontab -
+	(crontab -l ; echo "$cron_schedule $script_path update-rules >> $script_dir/run.log") | crontab -
 }
 
 docker_compose_path="docker compose"
