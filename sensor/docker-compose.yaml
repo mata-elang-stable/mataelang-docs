@@ -29,7 +29,7 @@ services:
 #
 
   snort-parser:
-    image: mfscy/snort3-parser:latest
+    image: mataelang/snort3-parser:1.1
     depends_on:
       - snort
     restart: always

@@ -1,4 +1,4 @@
-FROM mfscy/snort-base:3
+FROM mataelang/snort-base:3.1.47.0
 
 COPY pulledpork.conf /usr/local/etc/pulledpork/pulledpork.conf
 COPY snort.lua /usr/local/etc/snort/snort.lua
