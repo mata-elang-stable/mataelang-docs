@@ -77,11 +77,6 @@ $ sudo su -
 ```
 Please ensure that Snort and Snort-parser container statuses are UP
 
-### Manually Run Snort Rule Update
-
-```
-# ./run.sh update-rules
-```
 
 Check with:
 ```
@@ -108,4 +103,10 @@ Check with:
 To disable auto updater:
 ```
 # ./run.sh unset-automation
+```
+
+### Manually Run Snort Rule Update
+
+```
+# ./run.sh update-rules
 ```
