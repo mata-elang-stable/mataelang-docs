@@ -77,6 +77,22 @@ $ sudo su -
 ```
 Please ensure that Snort and Snort-parser container statuses are UP
 
+### Manually Run Snort Rule Update
+
+```
+# ./run.sh update-rules
+```
+
+Check with:
+```
+# crontab -l
+```
+
+To disable auto updater:
+```
+# ./run.sh unset-automation
+```
+
 ### Configure Snort Rule Auto Update (Optional)
 This command will add a line into crontab:
 
