@@ -83,11 +83,6 @@ Check with:
 # crontab -l
 ```
 
-To disable auto updater:
-```
-# ./run.sh unset-automation
-```
-
 ### Configure Snort Rule Auto Update (Optional)
 This command will add a line into crontab:
 
