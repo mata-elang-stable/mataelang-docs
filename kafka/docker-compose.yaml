@@ -2,7 +2,7 @@ version: '3'
 
 services:
   mqtt-source:
-    image: mfscy/kafka-mqtt-source
+    image: mataelang/kafka-mqtt-source:1.1
     container_name: mqtt-source
     env_file:
       - conf/mqtt-source.env
