@@ -121,9 +121,9 @@ dump complete
 **3. Verify the restored data in your index pattern**
 - via Dashboard
   - check on Index Pattern tab
-  ![image.png](./image.png)
+  ![image.png](.images/backup/image.png)
   - click on the Create Index Pattern Button, and check if your restored index data name already seen in the pattern
-  ![image-1.png](./image-1.png)
+  ![image-1.png](.images/backup/image-1.png)
 - via curl
 using this command :
 ```
@@ -136,7 +136,7 @@ curl https://admin:admin@localhost:9200/event-all-10s-backup/_search
 ```
 
 Output:
-![image-2.png](./image-2.png)
+![image-2.png](.images/backup/image-2.png)
 
 Note:
 if you have a problem with your TLS certificate, please use this command :
