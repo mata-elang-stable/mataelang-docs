@@ -53,7 +53,7 @@ services:
       SPARK_WORKER_MEMORY: 1G
       SPARK_WORKER_DIR: /opt/spark/work-dir
     command: >
-      bash -c "/opt/spark/sbin/start-worker.sh -h $(hostname -I | cut -d' ' -f1) $$SPARK_MASTER"
+      bash -c "/opt/spark/sbin/start-worker.sh $$SPARK_MASTER"
     deploy:
       mode: replicated
       replicas: 2
@@ -73,7 +73,7 @@ services:
       SPARK_WORKER_MEMORY: 2G
       SPARK_WORKER_DIR: /opt/spark/work-dir
     command: >
-      bash -c "/opt/spark/sbin/start-worker.sh -h $(hostname -I | cut -d' ' -f1) $$SPARK_MASTER"
+      bash -c "/opt/spark/sbin/start-worker.sh $$SPARK_MASTER"
     deploy:
       mode: replicated
       replicas: 2
