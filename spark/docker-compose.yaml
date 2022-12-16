@@ -2,7 +2,7 @@ version: '3.4'
 
 x-spark-default-env:
   &spark-default-env
-  SPARK_NO_DAEMONIZE: true
+  SPARK_NO_DAEMONIZE: "true"
   SPARK_SCALA_VERSION: 2.13
 
 x-spark-default:
