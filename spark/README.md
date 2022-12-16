@@ -6,6 +6,13 @@
 - [x] Install Docker Engine
 - [x] Install docker-compose command
 
+## Configuration
+Before starting the service, you must configure the configuration files to match your existing environment. Here are the configuration files that you need to prepare.
+  - `.env`
+  - `conf/app.properties`
+  - `conf/log4j2.properties`
+  - `conf/spark-defaults.conf`
+
 ## Installation
 
 **1. Start Spark services and confirm the services are up.**
