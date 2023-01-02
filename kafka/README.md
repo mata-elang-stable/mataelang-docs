@@ -1,26 +1,30 @@
-# Bitnami-Kafka
+# Defense Center - Zookeeper, Kafka, MQTT Source, and Kafka Dashboard
 
 
 ## Prerequisites
 
-- [x] Install Docker Engine
-- [x] Install docker-compose
+- [x] Install [Docker Engine](https://docs.docker.com/engine/install/)
+- [x] Install [docker-compose](https://docs.docker.com/compose/install/)
+
+## Services
+ - Apache Zookeeper
+ - Apache Kafka
+ - [Kafka UI by provectuslabs](https://github.com/provectus/kafka-ui)
+ - [MQTT Source Service by Mata Elang Team](https://github.com/mata-elang-stable/kafka-mqtt-source)
 
 ## Usage
 
-**1. Configure the environment variable in `.env` file**
+**1. Get `docker-compose.yaml` template from GitHub.**
 
-You can change the environment of the services in `conf` directory.
-- zookeper.env
-    Environtment Variable File for customizing the Apache Zookeper   Dockerfile, implemented variable in zookeper.env file is default variable
-- kafka.env
-    Environtment Variable File for customizing the Kafka Dockerfile, implemented variables in kafka.env are default variables
-- mqtt-source.env
-    Environtment Variable File for customizing the Dockerfile that connect the MQTT Hosts and Kafka on the server, implemented variables in mqtt-source.env are default variables
-- control-center.env
-    Environtment Variable File for customizing the Dockerfile that represent the Apache Kafka UI, implemented variables in control-center.env are default variables
+```bash
+curl -o docker-compose.yaml https://github.com/mata-elang-stable/mataelang-docs/kafka/docker-compose.yaml
+```
+
+**2. Configure the environment variable in `docker-compose.yaml` file**
+
+Change some parameters in each service that you need in `docker-compose.yaml` file.
     
-**2. Start Kafka services and confirm the services are up.**
+**3. Start Kafka services and confirm the services are up.**
 
 ```
 sudo docker-compose up -d
@@ -30,8 +34,8 @@ sudo docker-compose up -d
 sudo docker-compose ps
 ```
 
-**2. Open the following URL in your browser to see the dashboard.**
+**Open the following URL in your browser to see the dashboard.**
 
 - URL: `http://<Kafla Server (e.g. 172.16.2.40)>:9021/`
 
-**3. You can check received messages by selecting "Topics" -> "sensor_events" -> "Messages" in the dashboard**
+**You can check received messages by selecting "Topics" -> "sensor_events" -> "Messages" in the dashboard**

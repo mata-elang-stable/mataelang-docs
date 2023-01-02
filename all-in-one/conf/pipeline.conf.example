@@ -1,0 +1,22 @@
+input {
+   kafka {
+     bootstrap_servers => "kafka:9092"
+     topics => "event_all_10s"
+   }
+ }
+filter {
+	json {
+		source => "message"
+		remove_field => ["message", "event"]	
+	}
+}
+ output {
+   opensearch {
+     hosts => ["https://opensearch-node1:9200", "https://opensearch-node2:9200"]
+     index => "event-all-10s-%{+YYYY.MM.dd}"
+     user => "admin"
+     password => "admin"
+     ssl => true
+     ssl_certificate_verification => false
+   }
+ }
