@@ -5,10 +5,24 @@ volumes:
 
 services:
   mosquitto:
-    image: eclipse-mosquitto
+    image: eclipse-mosquitto:2.0.15
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ./mosquitto_passwd:/mosquitto/config/password_file:ro
       - mosquitto_data:/mosquitto/data
     ports:
       - 1883:1883
-      - 9001:9001
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+      
+

@@ -42,20 +42,35 @@ docker compose exec -it -w /opt/spark spark-master /opt/spark/bin/spark-submit \
      --class org.mataelang.kaspacore.jobs.SensorEnrichDataStreamJob \
      --total-executor-cores 1 \
      --conf spark.submit.deployMode=cluster \
+     --conf spark.driver.memory=1g \
      --conf spark.executor.cores=1 \
      --conf spark.executor.memory=1g \
+     --conf spark.eventLog.enabled=true \
+     --conf spark.eventLog.dir=hdfs://192.168.1.121:9000/user/fadhilyori/spark/spark-events \
      --files conf/app.properties \
-     hdfs://172.17.0.1:9000/user/hadoop/kaspacore/files/kaspacore.jar
+     hdfs://192.168.1.121:9000/user/fadhilyori/kaspacore/files/kaspacore.jar
 ```
 2. SensorAggregationStreamJob
 ```bash
 docker compose exec -it -w /opt/spark spark-master /opt/spark/bin/spark-submit \
      --master spark://spark-master:7077 \
      --class org.mataelang.kaspacore.jobs.SensorAggregationStreamJob \
-     --total-executor-cores 1 \
-     --conf spark.submit.deployMode=cluster \
+     --total-executor-cores 3 \
+     --conf spark.submit.deployMode=client \
+     --conf spark.driver.memory=1g \
      --conf spark.executor.cores=1 \
      --conf spark.executor.memory=1g \
+     --conf spark.eventLog.enabled=true \
+     --conf spark.eventLog.dir=hdfs://192.168.1.121:9000/user/fadhilyori/spark/spark-events \
+     --conf spark.sql.shuffle.partitions=5 \
+     --conf spark.sql.codegen.aggregate.map.twolevel.enabled=false \
+     --conf spark.sql.streaming.metricsEnabled=true \
      --files conf/app.properties \
-     hdfs://172.17.0.1:9000/user/hadoop/kaspacore/files/kaspacore.jar
+     hdfs://192.168.1.121:9000/user/fadhilyori/kaspacore/files/kaspacore.jar
 ```
+
+beli Pi modul compute 4 + DeskPi Super6C udh cukup ini buat dibawa demo2 gak berat wkwk
+
+https://www.raspberrypi.com/products/compute-module-4
+
+https://deskpi.com/products/deskpi-super6c-raspberry-pi-cm4-cluster-mini-itx-board-6-rpi-cm4-supported

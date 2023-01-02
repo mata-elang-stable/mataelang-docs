@@ -1,11 +1,22 @@
 version: '3'
 
+volumes:
+  zookeeper_data:
+  zookeeper_log:
+  kafka_data:
+
 services:
   mqtt-source:
     image: mataelang/kafka-mqtt-source:1.1
     container_name: mqtt-source
-    env_file:
-      - conf/mqtt-source.env
+    environment:
+      MQTT_HOST: 172.17.0.1
+      MQTT_PORT: 1883
+      MQTT_USERNAME:
+      MQTT_PASSWORD:
+      MQTT_TOPIC: mataelang/sensor/v3/+
+      KAFKA_BOOSTRAP_SERVERS: kafka:9092
+      KAFKA_PRODUCE_TOPIC: sensor_events
     deploy:
       resources:
         limits:
@@ -16,14 +27,18 @@ services:
           memory: 32M
 
   zookeeper:
-    image: 'bitnami/zookeeper:latest'
-    container_name: zookeeper
-    hostname: zookeeper
-    ports:
-      - '2181:2181'
-    env_file:
-      - conf/zookeeper.env
+    image: confluentinc/cp-zookeeper:7.3.0
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    volumes:
+      - zookeeper_data:/var/lib/zookeeper/data
+      - zookeeper_log:/var/lib/zookeeper/log
     deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
       resources:
         limits:
           cpus: '0.5'
@@ -33,17 +48,27 @@ services:
           memory: 256M
 
   kafka:
-    image: 'bitnami/kafka:latest'
-    container_name: kafka
-    hostname: kafka
-    ports:
-      # - '9092:9092'
-      - '9093:9093'
-    env_file:
-      - conf/kafka.env
+    image: confluentinc/cp-kafka:7.3.0
     depends_on:
       - zookeeper
+    ports:
+      - target: 9093
+        published: 9093
+        protocol: tcp
+        mode: host
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,EXTERNAL://172.17.0.1:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    volumes:
+      - kafka_data:/var/lib/kafka/data
     deploy:
+      mode: replicated
+      replicas: 1
       resources:
         limits:
           cpus: '0.5'
@@ -61,8 +86,10 @@ services:
       - mqtt-source
     ports:
       - "9021:8080"
-    env_file:
-      - conf/control-center.env
+    environment:
+      KAFKA_CLUSTERS_0_NAME: MataElangKafkaCluster
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
     deploy:
       resources:
         limits:

@@ -57,6 +57,14 @@ Mata Elang project, consists of following general components, and the technologi
 - 4 GB of RAM
 - 500 GB of HDD
 ## Install Preparations
+
+### Deployment Methods
+You can use our `docker-compose.yaml` file to quickly start with the Mata Elang Platform. We already automate the process, and you only need to change some configurations. 
+
+If you want to try all components in the same host, you can try to check in the `all-in-one` folder.
+
+> :warning: This default deployment is not recommended for production. You always need to review and change the configuration based on your needs and hardware resources. You still need to secure your environment and configure a firewall before deploying it to the public.
+
 ### Installation Media Procedures
 Currently we're using USB drive to store all dependencies for the project.
 ## Offline Installations
@@ -99,3 +107,12 @@ Please refer to [USAGE.md](USAGE.md) document
 
 # Backup
 Please refer to [BACKUP.md](BACKUP.md) document
+
+# Troubleshoot
+
+1. No swap limit support
+  ```
+  WARNING: No swap limit support
+  ```
+  If you have a warning message like this while running using docker-compose, you can go to this documentation to fix the issue.
+  https://docs.docker.com/engine/install/troubleshoot/#kernel-cgroup-swap-limit-capabilities

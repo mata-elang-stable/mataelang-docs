@@ -149,9 +149,9 @@ services:
       SPARK_MASTER_PORT: 7077
       DEPLOY_MODE: cluster
       TOTAL_EXECUTOR_CORES: 1
-      SPARK_DRIVER_MEMORY: 1g
+      SPARK_DRIVER_MEMORY: 2g
       SPARK_EXECUTOR_CORES: 1
-      SPARK_EXECUTOR_MEMORY: 1g
+      SPARK_EXECUTOR_MEMORY: 2g
       SPARK_SHUFFLE_PARTITION: 1
       SPARK_APP_CLASSNAME: org.mataelang.kaspacore.jobs.SensorAggregationStreamJob
     command: >
