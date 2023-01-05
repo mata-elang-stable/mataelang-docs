@@ -1,2 +1,15 @@
 listener 1883
-allow_anonymous true
+allow_anonymous false
+persistence true
+persistence_location /mosquitto/data/
+autosave_interval 60
+queue_qos0_messages true
+max_queued_messages 100000
+max_inflight_messages 10000
+
+connection_messages true
+log_dest stdout
+
+persistent_client_expiration 1h
+
+password_file /mosquitto/config/password_file

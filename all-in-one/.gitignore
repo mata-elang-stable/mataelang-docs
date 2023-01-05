@@ -1,3 +1,4 @@
 .env
 conf/*.properties
 conf/*.conf
+conf/mosquitto_passwd

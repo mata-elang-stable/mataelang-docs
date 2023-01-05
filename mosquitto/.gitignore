@@ -1,1 +1,2 @@
 mosquitto.conf
+mosquitto_passwd
