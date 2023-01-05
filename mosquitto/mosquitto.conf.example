@@ -4,7 +4,6 @@ persistence true
 persistence_location /mosquitto/data/
 autosave_interval 60
 queue_qos0_messages true
-store_clean_interval 20
 max_queued_messages 100000
 max_inflight_messages 10000
 
