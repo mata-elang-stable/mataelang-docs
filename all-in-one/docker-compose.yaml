@@ -162,9 +162,9 @@ services:
     image: mataelang/spark:3.3.1-scala2.13
     depends_on:
       - spark-master
-    ports:
-      - "8181-8182:8081"
-      - "4041-4042:4040"
+    # ports:
+    #   - "8181-8182:8081"
+    #   - "4041-4042:4040"
     environment:
       <<: *spark-default-env
       SPARK_MASTER: spark://spark-master:7077
@@ -182,9 +182,10 @@ services:
     image: mataelang/spark:3.3.1-scala2.13
     depends_on:
       - spark-master
-    ports:
-      - "8183-8184:8081"
-      - "4043-4044:4040"
+      - spark-worker
+    # ports:
+    #   - "8183-8184:8081"
+    #   - "4043-4044:4040"
     environment:
       <<: *spark-default-env
       SPARK_MASTER: spark://spark-master:7077
@@ -192,7 +193,7 @@ services:
       SPARK_WORKER_MEMORY: 2G
       SPARK_WORKER_DIR: /opt/spark/work-dir
     command: >
-      bash -c "/opt/spark/sbin/start-worker.sh -h $(hostname -I | cut -d' ' -f1) $$SPARK_MASTER"
+      bash -c "sleep 5 && /opt/spark/sbin/start-worker.sh $$SPARK_MASTER"
     deploy:
       mode: replicated
       replicas: 2
@@ -230,7 +231,6 @@ services:
     depends_on:
       - spark-master
       - spark-worker
-      - spark-worker-bigmemory
     working_dir: /opt/spark
     environment:
       <<: *spark-default-env
@@ -241,7 +241,7 @@ services:
       SPARK_EXECUTOR_MEMORY: 1g
       SPARK_APP_CLASSNAME: org.mataelang.kaspacore.jobs.SensorEnrichDataStreamJob
     command: >
-      bash -c "sleep 5 && /opt/spark/bin/spark-submit \\
+      bash -c "sleep 10 && /opt/spark/bin/spark-submit \\
           --total-executor-cores $$TOTAL_EXECUTOR_CORES \\
           --conf spark.submit.deployMode=$$DEPLOY_MODE \\
           --conf spark.driver.memory=$$SPARK_DRIVER_MEMORY \\
@@ -258,7 +258,7 @@ services:
     restart: "no"
     depends_on:
       - spark-master
-      - spark-worker
+      - spark-worker-bigmemory
     working_dir: /opt/spark
     environment:
       <<: *spark-default-env
@@ -270,7 +270,7 @@ services:
       SPARK_SHUFFLE_PARTITION: 1
       SPARK_APP_CLASSNAME: org.mataelang.kaspacore.jobs.SensorAggregationStreamJob
     command: >
-      bash -c "sleep 5 && /opt/spark/bin/spark-submit \\
+      bash -c "sleep 10 && /opt/spark/bin/spark-submit \\
           --class $$SPARK_APP_CLASSNAME \\
           --total-executor-cores $$TOTAL_EXECUTOR_CORES \\
           --conf spark.submit.deployMode=$$DEPLOY_MODE \\
