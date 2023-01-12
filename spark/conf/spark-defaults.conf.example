@@ -1,3 +1,8 @@
+# Worker
+spark.worker.cleanup.enabled=true
+spark.worker.cleanup.interval=1800
+spark.worker.cleanup.appDataTtl=14400
+
 # History Server
 spark.history.ui.port=18080
 spark.history.retainedApplications=10
