@@ -243,7 +243,7 @@ services:
     restart: "no"
     depends_on:
       - spark-master
-      - spark-worker-bigmemory
+      - spark-worker
     working_dir: /opt/spark
     environment:
       <<: *spark-submit-default-env
