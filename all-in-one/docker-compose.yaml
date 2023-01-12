@@ -174,7 +174,7 @@ services:
     environment:
       <<: *spark-worker-default-env
       SPARK_WORKER_CORES: 2
-      SPARK_WORKER_MEMORY: 3G
+      SPARK_WORKER_MEMORY: 4G
     command: >
       bash -c "/opt/spark/sbin/start-worker.sh $$SPARK_MASTER"
     deploy:
