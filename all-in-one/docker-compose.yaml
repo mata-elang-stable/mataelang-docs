@@ -8,7 +8,7 @@ x-spark-default: &spark-default
   env_file: .env
   volumes:
     - ./conf/app.properties:/opt/spark/conf/app.properties
-    # - ./conf/log4j2.properties:/opt/spark/conf/log4j2.properties # optional
+    - ./conf/log4j2.properties:/opt/spark/conf/log4j2.properties
     - ./conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
 
 x-spark-worker-default-env: &spark-worker-default-env
@@ -58,8 +58,8 @@ services:
     environment:
       MQTT_HOST: mosquitto
       MQTT_PORT: 1883
-      MQTT_USERNAME:
-      MQTT_PASSWORD:
+      MQTT_USERNAME: your_mqtt_username
+      MQTT_PASSWORD: your_mqtt_password
       MQTT_TOPIC: mataelang/sensor/v3/+
       KAFKA_BOOSTRAP_SERVERS: kafka:9092
       KAFKA_PRODUCE_TOPIC: sensor_events
@@ -105,6 +105,8 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_LOG_RETENTION_BYTES: 536870912 # 512MB
+      KAFKA_LOG_RETENTION_MS: 86400000 # 1 day
     volumes:
       - kafka_data:/var/lib/kafka/data
     deploy:

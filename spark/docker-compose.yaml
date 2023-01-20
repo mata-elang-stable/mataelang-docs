@@ -9,7 +9,7 @@ x-spark-default: &spark-default
   volumes:
     - ./conf/app.properties:/opt/spark/conf/app.properties
     - ./conf/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
-    # - ./conf/log4j2.properties:/opt/spark/conf/log4j2.properties # optional
+    - ./conf/log4j2.properties:/opt/spark/conf/log4j2.properties
 
 x-spark-worker-default-env: &spark-worker-default-env
   <<: *spark-default-env
