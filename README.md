@@ -69,7 +69,7 @@ If you want to try all components in the same host, you can try to check in the 
 Currently we're using USB drive to store all dependencies for the project.
 ## Offline Installations
 For offline installation purpose, we will be using the Ansible technology to automate the process.
-Please refer to [this](ansible/README.md) folder for Ansible offline install
+Please refer to [this](me-ansible-playbook/README.md) folder for Ansible offline install
 ## Online Installations
 For the online installation you need a stable internet connection to download all necessary dependencies and components from our repository.
 There are 2 method for online installation :
@@ -79,7 +79,7 @@ There are 2 method for online installation :
 #### Manual Installation
 For manual Mata Elang components installation there are several folders in this repository that contain the guidance for the installation :
 
-1. Sensor Snort : [sensor](sensor/README.md) folder
+1. Sensor Snort : [sensor](sensor-snort/README.md) folder
 2. Mosquitto (MQTT Broker): [mosquitto](mosquitto/README.md) folder
 3. Apache Kafka : [kafka](kafka/README.md) folder
 4. Kaspacore & Apache Spark : [spark](spark/README.md) folder
