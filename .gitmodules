@@ -1,6 +1,6 @@
-[submodule "ansible/me-ansible-roles"]
-	path = ansible/me-ansible-roles
-	url = git@gitlab.com:mata-elang/stable/mataelang-ansible-roles.git
 [submodule "sensor-snort"]
 	path = sensor-snort
 	url = https://github.com/mata-elang-stable/sensor-snort.git
+[submodule "me-ansible-playbook"]
+	path = me-ansible-playbook
+	url = https://github.com/mata-elang-stable/me-ansible-playbook.git
