@@ -99,7 +99,7 @@ git clone https://gitlab.com/mata-elang/stable/mataelang-ansible-roles.git
 ```
 
 For further information, please refer to: 
-- [Ansible documentation](ansible/README.md)
+- [Ansible documentation](me-ansible-playbook/README.md)
 - https://gitlab.com/mata-elang/stable/mataelang-ansible-roles
 
 # Usage
