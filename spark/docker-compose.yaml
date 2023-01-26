@@ -104,9 +104,11 @@ services:
       SPARK_EXECUTOR_MEMORY: 1g
       SPARK_APP_UI: 4040
       SPARK_APP_CLASSNAME: org.mataelang.kaspacore.jobs.SensorEnrichDataStreamJob
+      SPARK_APP_NAME: SensorEnrichDataStreamJob
     command: >
       bash -c "/opt/spark/bin/spark-submit \\
           --class $$SPARK_APP_CLASSNAME \\
+          --name $$SPARK_APP_NAME \\
           --total-executor-cores $$TOTAL_EXECUTOR_CORES \\
           --conf spark.ui.port=$$SPARK_APP_UI \\
           --conf spark.submit.deployMode=$$DEPLOY_MODE \\
@@ -135,9 +137,11 @@ services:
       SPARK_SHUFFLE_PARTITION: 1
       SPARK_APP_UI: 4041
       SPARK_APP_CLASSNAME: org.mataelang.kaspacore.jobs.SensorAggregationStreamJob
+      SPARK_APP_NAME: SensorAggregationStreamJob
     command: >
       bash -c "/opt/spark/bin/spark-submit \\
           --class $$SPARK_APP_CLASSNAME \\
+          --name $$SPARK_APP_NAME \\
           --total-executor-cores $$TOTAL_EXECUTOR_CORES \\
           --conf spark.ui.port=$$SPARK_APP_UI \\
           --conf spark.submit.deployMode=$$DEPLOY_MODE \\

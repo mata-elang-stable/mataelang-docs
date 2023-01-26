@@ -7,10 +7,18 @@ spark.worker.cleanup.appDataTtl=14400
 spark.history.ui.port=18080
 spark.history.retainedApplications=10
 spark.history.fs.update.interval=10s
+spark.history.fs.cleaner.maxNum=5
 spark.history.fs.cleaner.enabled=true
-spark.history.fs.cleaner.interval=1d
-spark.history.fs.cleaner.maxAge=7d
+spark.history.fs.cleaner.interval=1h
+spark.history.fs.cleaner.maxAge=3d
+spark.history.fs.eventLog.rolling.maxFilesToRetain=25
 
 # App Configuration
 spark.master=spark://spark-master:7077
 spark.eventLog.enabled=true
+spark.eventLog.rolling.enabled=true
+spark.eventLog.rolling.maxFileSize=128m
+spark.eventLog.compress=true
+
+# Hadoop
+spark.hadoop.dfs.replication=1
