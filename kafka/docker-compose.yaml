@@ -66,6 +66,7 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_LOG_RETENTION_BYTES: 536870912 # 512MB
       KAFKA_LOG_RETENTION_MS: 86400000 # 1 day
+      KAFKA_LOG_SEGMENT_BYTES: 536870912 # 512MB
     volumes:
       - kafka_data:/var/lib/kafka/data
     deploy:
