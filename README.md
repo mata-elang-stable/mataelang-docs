@@ -69,7 +69,7 @@ If you want to try all components in the same host, you can try to check in the 
 Currently we're using USB drive to store all dependencies for the project.
 ## Offline Installations
 For offline installation purpose, we will be using the Ansible technology to automate the process.
-Please refer to [this](me-ansible-playbook/README.md) folder for Ansible offline install
+Please refer to [this](https://github.com/mata-elang-stable/me-ansible-playbook#readme) folder for Ansible offline install
 ## Online Installations
 For the online installation you need a stable internet connection to download all necessary dependencies and components from our repository.
 There are 2 method for online installation :
